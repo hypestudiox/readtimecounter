@@ -8,9 +8,9 @@ Put the scripts `readtime.js` in your HTML and that’s all.
 
 You can also add it to your website by embedding `readtime.js`.
 
-`<script async src="/js/readtimecou.js"></script>`
+`<script async src="/js/readtime.js"></script>`
 
-`https://cdn.jsdelivr.net/gh/hypestudiox/readtimecounter@1.0.3/readtime.js`
+CDN: [https://www.jsdelivr.com/package/gh/hypestudiox/readtimecounter](https://www.jsdelivr.com/package/gh/hypestudiox/readtimecounter)
 
 ### Define the area for the counting the Read Time
 
@@ -28,7 +28,7 @@ For example: `<span id="readtime"></span>`
 
 The text content will be written by the javascript inside the element with `id="hybridCount"`.
 
-For example: `<span id="hybridCount"></p>`
+For example: `<span id="hybridCount"></span>`
 
 You may customize how it writes in the script, if you use it.
 
@@ -52,7 +52,7 @@ How long does it take to read an image, in seconds:
 
 See it on CodePen: [https://codepen.io/pen/XWNRxWN](https://codepen.io/pen/XWNRxWN)
 
-## Know Issues
+## Known Issues
 
 **👾 Some known, but minor, issues:**
 
