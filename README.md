@@ -4,11 +4,13 @@ A *simple* javascript read time counter optimized for content written in English
 
 ## Usage
 
-Put the scripts `readtimecounter.js` in your HTML and that’s all.
+Put the scripts `readtime.js` in your HTML and that’s all.
 
-You can also add it to your website by embedding `readtimecounter.js`.
+You can also add it to your website by embedding `readtime.js`.
 
-`<script async src="your-path/readtimecounter.js"></script>`
+`<script async src="/js/readtimecou.js"></script>`
+
+`https://cdn.jsdelivr.net/gh/hypestudiox/readtimecounter@1.0.3/readtime.js`
 
 ### Define the area for the counting the Read Time
 
@@ -32,7 +34,7 @@ You may customize how it writes in the script, if you use it.
 
 ## Configurations
 
-Open the `readtimecounter.js` with a text editor, and you will see the below. Change the numbers that may suit your case.
+Open the `readtime.js` with a text editor, and you will see the below. Change the numbers that may suit your case.
 
 Reading speed of English words, in words per minute:
 
@@ -40,11 +42,11 @@ Reading speed of English words, in words per minute:
 
 Reading speed of non-English characters, in words per minute:
 
-`let charSpeed = 275;`
+`let charSpeed = 280;`
 
 How long does it take to read an image, in seconds:
 
-`let imgSpeed = 25;`
+`let imgSpeed = 22;`
 
 ## Example
 
@@ -55,7 +57,7 @@ See it on CodePen: [https://codepen.io/pen/XWNRxWN](https://codepen.io/pen/XWNRx
 **👾 Some known, but minor, issues:**
 
 1. Some punctuation marks are not removed from counting yet, and some may be double-counted.
-2. Space after a non-English character is being counted as a word.
+2. It is possible that some spaces after non-English words are counted as a word.
 3. Minor wrong word counting when breaking lines.
 
 📣 **Please feel free to comment, contribute and make the code better!**
