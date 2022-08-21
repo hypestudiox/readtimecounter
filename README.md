@@ -7,7 +7,7 @@ A *simple* javascript read time counter optimized for content written in English
 Put the scripts in your HTML and that’s all.
 
 You can also add it to your website by embedding `readtimecounter.js`.
-`<script async src="../readtimecounter.js"></script>`
+`<script async src="your_path/readtimecounter.js"></script>`
 
 ### Define the area for the counting the Read Time
 
@@ -15,9 +15,9 @@ Put `id=”readtimearea”` in the `div` that contains the whole article.
 
 **Limitation:** Support only one `readtimearea` per webpage only.
 
-### Output: Read Time
+### Output: Reading Time
 
-Read Time in minutes: `id="readtime"` 
+Reading Time in minutes: `id="readtime"` 
 
 For example: `<span id="readtime"></span>`
 
@@ -52,10 +52,7 @@ See it on CodePen: [https://codepen.io/pen/XWNRxWN](https://codepen.io/pen/XWNRx
 2. Space after a non-English character is being counted as a word.
 3. Minor wrong word counting when breaking lines.
 
-<aside>
-📣 **Please help to make the code better! Thanks a lot.**
-
-</aside>
+📣 **Please feel free to comment, contribute and make the code better!**
 
 ---
 
