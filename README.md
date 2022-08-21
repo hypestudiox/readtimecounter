@@ -1,12 +1,13 @@
 # Reading Time Counter
 
-A simple javascript read time counter optimized for content written in English, [CKJ](https://en.wikipedia.org/wiki/CJK_characters) characters (and possibly more languages). The script also takes into account the number of images.
+A *simple* javascript read time counter optimized for content written in English, [CKJ](https://en.wikipedia.org/wiki/CJK_characters) characters (and probably more languages). The script also takes into account the number of images in the content.
 
 ## Usage
 
 Put the scripts in your HTML and that’s all.
 
 You can also add it to your website by embedding `readtimecounter.js`.
+`<script async src="../readtimecounter.js"></script>`
 
 ### Define the area for the counting the Read Time
 
@@ -31,15 +32,12 @@ For example: `<span id="hybridCount"></p>`
 Open the `readtimecounter.js` with a text editor, and you will see the below. Change the numbers that may suit your case.
 
 Reading speed of English words, in words per minute:
-
 `let engSpeed = 235;`
 
 Reading speed of non-English characters, in words per minute:
-
 `let charSpeed = 275;`
 
 How long does it take to read an image, in seconds:
-
 `let imgSpeed = 25;`
 
 ## Example
@@ -54,7 +52,10 @@ See it on CodePen: [https://codepen.io/pen/XWNRxWN](https://codepen.io/pen/XWNRx
 2. Space after a non-English character is being counted as a word.
 3. Minor wrong word counting when breaking lines.
 
-**Please help to make the code better! Thanks a lot.**
+<aside>
+📣 **Please help to make the code better! Thanks a lot.**
+
+</aside>
 
 ---
 
