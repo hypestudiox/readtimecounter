@@ -8,9 +8,9 @@ Put the scripts `readtime.js` in your HTML and that’s all.
 
 You can also add it to your website by embedding `readtime.js`.
 
-`<script async src="/js/readtime.js"></script>`
+`<script async src="readtime.js"></script>`
 
-CDN: [https://www.jsdelivr.com/package/gh/hypestudiox/readtimecounter](https://www.jsdelivr.com/package/gh/hypestudiox/readtimecounter)
+CDN by jsDelivr: [https://www.jsdelivr.com/package/gh/hypestudiox/readtimecounter](https://www.jsdelivr.com/package/gh/hypestudiox/readtimecounter)
 
 ### Define the area for the counting the Read Time
 
@@ -46,7 +46,7 @@ Reading speed of non-English characters, in words per minute:
 
 How long does it take to read an image, in seconds:
 
-`let imgSpeed = 22;`
+`let imgSpeed = 20;`
 
 ## Example
 
@@ -54,7 +54,7 @@ See it on CodePen: [https://codepen.io/pen/XWNRxWN](https://codepen.io/pen/XWNRx
 
 ## Known Issues
 
-**👾 Some known, but minor, issues:**
+**👾 Some known *but minor* issues:**
 
 1. Some punctuation marks are not removed from counting yet, and some may be double-counted.
 2. It is possible that some spaces after non-English words are counted as a word.
