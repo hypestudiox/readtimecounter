@@ -1,7 +1,7 @@
 /**
  * Reading Time Counter
- * readtimecount.js
- * v1.0.0
+ * https://github.com/hypestudiox/readtimecounter
+ * v1.0.1
  */
 
 window.onload = function () {
@@ -31,12 +31,14 @@ function rtCounter() {
   var cleanCount = (count1 + count2 - count2 * 0.15).toFixed(0);
   // images counting
   var imgCount = theArea.getElementsByTagName("img");
-  // set reading speed
+  // set reading speed (words per minute)
   let engSpeed = 235;
   let charSpeed = 275;
+  // set how long does it take (seconds) to read an image
+  let imgSpeed = 25;
   // caculate read-time
   var readtimeCalc =
-    count1 / engSpeed + count2 / charSpeed + imgCount.length * 0.35;
+    count1 / engSpeed + count2 / charSpeed + imgCount.length * imgSpeed / 60;
   // write read-time
   document.getElementById("readtime").innerHTML = readtimeCalc.toFixed(2);
   // write counting results
