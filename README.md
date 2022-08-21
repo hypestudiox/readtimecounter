@@ -4,10 +4,11 @@ A *simple* javascript read time counter optimized for content written in English
 
 ## Usage
 
-Put the scripts in your HTML and that’s all.
+Put the scripts `readtimecounter.js` in your HTML and that’s all.
 
 You can also add it to your website by embedding `readtimecounter.js`.
-`<script async src="your_path/readtimecounter.js"></script>`
+
+`<script async src="your-path/readtimecounter.js"></script>`
 
 ### Define the area for the counting the Read Time
 
@@ -27,17 +28,22 @@ The text content will be written by the javascript inside the element with `id="
 
 For example: `<span id="hybridCount"></p>`
 
+You may customize how it writes in the script, if you use it.
+
 ## Configurations
 
 Open the `readtimecounter.js` with a text editor, and you will see the below. Change the numbers that may suit your case.
 
 Reading speed of English words, in words per minute:
+
 `let engSpeed = 235;`
 
 Reading speed of non-English characters, in words per minute:
+
 `let charSpeed = 275;`
 
 How long does it take to read an image, in seconds:
+
 `let imgSpeed = 25;`
 
 ## Example
