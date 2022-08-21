@@ -1,9 +1,8 @@
 /**
  * Reading Time Counter
  * https://github.com/hypestudiox/readtimecounter
- * v1.0.3
+ * v1.0.4
  */
-
 window.onload = function () {
   rtCounter();
 };
@@ -11,7 +10,6 @@ window.onload = function () {
 function rtCounter() {
   var theArea = document.getElementById("readtimearea");
   var str = theArea.innerHTML;
-  // remove some special characters
   str = str.replace(/[\u007F-\u00FE]/g, "");
   var str1 = str;
   var str2 = str;
@@ -27,18 +25,18 @@ function rtCounter() {
   // trying to reduce wrong countings conservatively
   // assuming 15% in non-Eng writing are not characters
   // need to be improved
-  var cleanCount = (count1 + count2 - count2 * 0.15).toFixed(0);
+  var cleanCount = (count1 + count2 * 0.85).toFixed(0);
   // images counting
   var imgCount = theArea.getElementsByTagName("img");
   // set reading speed (words per minute)
   let engSpeed = 235;
   let charSpeed = 280;
   // set how long does it take (seconds) to read an image
-  let imgSpeed = 22;
-  // caculate read-time
+  let imgSpeed = 20;
+  // caculate reading time needed
   var readtimeCalc =
-    count1 / engSpeed + count2 / charSpeed + imgCount.length * imgSpeed / 60;
-  // write read-time
+    count1 / engSpeed + count2 / charSpeed + (imgCount.length * imgSpeed) / 60;
+  // write reading time
   document.getElementById("readtime").innerHTML = readtimeCalc.toFixed(1);
   // write counting results
   // you may customize how it writes, if you use it
