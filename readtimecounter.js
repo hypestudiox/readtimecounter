@@ -1,7 +1,7 @@
 /**
  * Reading Time Counter
  * https://github.com/hypestudiox/readtimecounter
- * v1.0.1
+ * v1.0.2
  */
 
 window.onload = function () {
@@ -13,17 +13,16 @@ function rtCounter() {
   var str = theArea.innerHTML;
   // remove some special characters
   str = str.replace(/[\u007F-\u00FE]/g, "");
-  // let us make a duplication first
   var str1 = str;
   var str2 = str;
   // to count Eng: remove non-eng characters in the string
   str1 = str1.replace(/[^!-~\d\s]+/gi, "");
   // to count non-Eng: remove eng characters in the string
   str2 = str2.replace(/[!-~\d\s]+/gi, "");
-  var matches1 = str1.match(/[\u00ff-\uffff]|\S+/g);
-  var matches2 = str2.match(/[\u00ff-\uffff]|\S+/g);
-  count1 = matches1 ? matches1.length : 0;
-  count2 = matches2 ? matches2.length : 0;
+  var matched1 = str1.match(/[\u00ff-\uffff]|\S+/g);
+  var matched2 = str2.match(/[\u00ff-\uffff]|\S+/g);
+  count1 = matched1 ? matched1.length : 0;
+  count2 = matched2 ? matched2.length : 0;
   // return the total word count
   // trying to reduce wrong countings conservatively
   // assuming 15% in non-Eng writing are not characters
@@ -40,7 +39,7 @@ function rtCounter() {
   var readtimeCalc =
     count1 / engSpeed + count2 / charSpeed + imgCount.length * imgSpeed / 60;
   // write read-time
-  document.getElementById("readtime").innerHTML = readtimeCalc.toFixed(2);
+  document.getElementById("readtime").innerHTML = readtimeCalc.toFixed(1);
   // write counting results
   // you may customize how it writes, if you use it
   document.getElementById("hybridCount").innerHTML =
