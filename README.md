@@ -14,7 +14,7 @@ CDN by jsDelivr: [https://www.jsdelivr.com/package/gh/hypestudiox/readtimecounte
 
 ### Define the area for the counting the Read Time
 
-Put `id=”readtimearea”` in the `div` that contains the whole article.
+Put `id="readtimearea"` in the `div` that contains the whole article.
 
 **Limitation:** Support only one `readtimearea` per webpage only.
 
