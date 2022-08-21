@@ -1,7 +1,7 @@
 /**
  * Reading Time Counter
  * https://github.com/hypestudiox/readtimecounter
- * v1.0.2
+ * v1.0.3
  */
 
 window.onload = function () {
