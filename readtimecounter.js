@@ -27,15 +27,15 @@ function rtCounter() {
   // return the total word count
   // trying to reduce wrong countings conservatively
   // assuming 15% in non-Eng writing are not characters
-  // need to be improved later
+  // need to be improved
   var cleanCount = (count1 + count2 - count2 * 0.15).toFixed(0);
   // images counting
   var imgCount = theArea.getElementsByTagName("img");
   // set reading speed (words per minute)
   let engSpeed = 235;
-  let charSpeed = 275;
+  let charSpeed = 280;
   // set how long does it take (seconds) to read an image
-  let imgSpeed = 25;
+  let imgSpeed = 22;
   // caculate read-time
   var readtimeCalc =
     count1 / engSpeed + count2 / charSpeed + imgCount.length * imgSpeed / 60;
