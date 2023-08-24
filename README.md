@@ -1,6 +1,11 @@
 # Reading Time Counter
 
-A *simple* javascript read time counter optimized for content written in English, [CKJ](https://en.wikipedia.org/wiki/CJK_characters) characters (and probably more languages). The script also takes into account the number of images in the content.
+A *simple* yet *throughful* javascript reading time counter optimized for content written in English, [CKJ](https://en.wikipedia.org/wiki/CJK_characters) characters. The script also considered the number of images in the content.
+
+### Reading Time Counter 2.2.0 is added to this repo.
+
+### BUT the below README info are content of v1.X. I will update it soon when I have time!
+
 
 ## Usage
 

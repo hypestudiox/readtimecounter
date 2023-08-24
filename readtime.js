@@ -1,45 +1,72 @@
 /**
  * Reading Time Counter
  * https://github.com/hypestudiox/readtimecounter
- * v1.0.4
+ * v2.2.0
  */
-window.onload = function () {
-  rtCounter();
-};
-
-function rtCounter() {
-  var theArea = document.getElementById("readtimearea");
-  var str = theArea.innerHTML;
-  str = str.replace(/[\u007F-\u00FE]/g, "");
-  var str1 = str;
-  var str2 = str;
-  // to count Eng: remove non-eng characters in the string
-  str1 = str1.replace(/[^!-~\d\s]+/gi, "");
-  // to count non-Eng: remove eng characters in the string
-  str2 = str2.replace(/[!-~\d\s]+/gi, "");
-  var matched1 = str1.match(/[\u00ff-\uffff]|\S+/g);
-  var matched2 = str2.match(/[\u00ff-\uffff]|\S+/g);
-  count1 = matched1 ? matched1.length : 0;
-  count2 = matched2 ? matched2.length : 0;
-  // return the total word count
-  // trying to reduce wrong countings conservatively
-  // assuming 15% in non-Eng writing are not characters
-  // need to be improved
-  var cleanCount = (count1 + count2 * 0.85).toFixed(0);
-  // images counting
-  var imgCount = theArea.getElementsByTagName("img");
-  // set reading speed (words per minute)
-  let engSpeed = 235;
-  let charSpeed = 280;
-  // set how long does it take (seconds) to read an image
-  let imgSpeed = 20;
-  // caculate reading time needed
-  var readtimeCalc =
-    count1 / engSpeed + count2 / charSpeed + (imgCount.length * imgSpeed) / 60;
-  // write reading time
-  document.getElementById("readtime").innerHTML = readtimeCalc.toFixed(1);
-  // write counting results
-  // you may customize how it writes, if you use it
-  document.getElementById("hybridCount").innerHTML =
-    "( around " + cleanCount + " words and " + imgCount.length + " images )";
-}
+document.addEventListener("DOMContentLoaded", function () {
+  // Settings
+  let engSpeed = 235; // words per minute
+  let charSpeed = 280; // characters per minute
+  let imgSpeed = 15; // seconds per image
+  // Helper functions
+  function countEnglishWords(text) {
+    // Removes punctuations but considers hyphens between words, then split by spaces
+    let words = text
+      .replace(/[^\w\s-]|_/g, "")
+      .replace(/\s+/g, " ")
+      .split(" ");
+    return words.filter(Boolean).length; // Filter out any empty strings
+  }
+  function countNonEnglishCharacters(text) {
+    // Regular expression that matches CKJ characters, excludes numbers and punctuations.
+    let matches = text.match(
+      /[^\w\s!-@[-`{-~\uFF01-\uFF0F\uFF1A-\uFF20\uFF3B-\uFF40\uFF5B-\uFF65]+/g
+    );
+    return matches ? matches.join("").length : 0;
+  }
+  function countImages(element) {
+    return element.querySelectorAll("img").length;
+  }
+  function updateDisplay(element) {
+    let text = element.value || element.innerText; // for both textarea/input or other elements
+    let engCount = countEnglishWords(text);
+    let charCount = countNonEnglishCharacters(text);
+    let imgCount = countImages(element);
+    // Caculations
+    let engTime = engCount / engSpeed; // in minutes
+    let charTime = charCount / charSpeed; // in minutes
+    let imgTime = (imgCount * imgSpeed) / 60; // convert seconds to minutes
+    let totalReadingTime = engTime + charTime + imgTime;
+    let roundedTime = Math.round(totalReadingTime * 10) / 10; // round to 1 decimal place
+    // Display reading time
+    let displayTime =
+      roundedTime % 1 === 0 ? Math.round(roundedTime) : roundedTime;
+    document.getElementById("readtime").textContent = displayTime;
+    // Display counting info
+    let infoParts = [];
+    if (engCount > 0) infoParts.push(`English words: ${engCount}`);
+    if (charCount > 0) infoParts.push(`Non-English characters: ${charCount}`);
+    if (imgCount > 0) infoParts.push(`Images: ${imgCount}`);
+    document.getElementById("hybridCount").textContent = infoParts.join(", ");
+  }
+  // Monitor content changes
+  const readtimeArea = document.getElementById("readtimearea");
+  // Use input event for textarea/input elements and contenteditable, and MutationObserver for others
+  if (
+    readtimeArea.tagName === "INPUT" ||
+    readtimeArea.tagName === "TEXTAREA" ||
+    readtimeArea.isContentEditable
+  ) {
+    readtimeArea.addEventListener("input", function () {
+      updateDisplay(readtimeArea);
+    });
+  } else {
+    const config = { attributes: true, childList: true, subtree: true };
+    const observer = new MutationObserver(function () {
+      updateDisplay(readtimeArea);
+    });
+    observer.observe(readtimeArea, config);
+  }
+  // Initial update
+  updateDisplay(readtimeArea);
+});
