@@ -1,15 +1,15 @@
 # Reading Time Counter
 
-A *simple* yet *throughful* javascript reading time counter optimized for content written in English, [CKJ](https://en.wikipedia.org/wiki/CJK_characters) characters. The script also considered the number of images in the content.
+A *simple* yet *thoughtful* javascript reading time counter optimized for content written in English, [CKJ](https://en.wikipedia.org/wiki/CJK_characters) characters. The script also considered the number of images in the content.
 
-### Reading Time Counter 2.2.0 is added to this repo.
+### Reading Time Counter v2.2.0 is added to this repo.
 
-### BUT the below README info are content of v1.X. I will update it soon when I have time!
+### BUT the below README info is still the content of v1.X. I will update it soon when I have time!
 
 
 ## Usage
 
-Put the scripts `readtime.js` in your HTML and that’s all.
+Put the script `readtime.js` in your HTML, and that’s all.
 
 You can also add it to your website by embedding `readtime.js`.
 
@@ -41,11 +41,11 @@ You may customize how it writes in the script, if you use it.
 
 Open the `readtime.js` with a text editor, and you will see the below. Change the numbers that may suit your case.
 
-Reading speed of English words, in words per minute:
+The reading speed of English words, in words per minute:
 
 `let engSpeed = 235;`
 
-Reading speed of non-English characters, in words per minute:
+The reading speed of non-English characters, in words per minute:
 
 `let charSpeed = 280;`
 
