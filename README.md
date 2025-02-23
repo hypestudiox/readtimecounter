@@ -1,6 +1,6 @@
 # Reading Time Counter v3.2.4
 
-A ***simple*** yet ***robust*** reading time counter calculates reading time for English, [CKJ](https://en.wikipedia.org/wiki/CJK_characters) (Chinese, Korean, Japanese), and other Latin-based languages. The script also takes into account the number of images in the content, providing an estimated reading time that combines text and image viewing time.
+A ***simple and robust*** reading time counter calculates the reading time for English, [CKJ](https://en.wikipedia.org/wiki/CJK_characters) (Chinese, Korean, Japanese), and other Latin-based languages. The script also takes into account the number of images in the content, providing an estimated reading time that combines text and image viewing time.
 
 <br>
 
@@ -8,10 +8,10 @@ A ***simple*** yet ***robust*** reading time counter calculates reading time for
 
 ### The script:
 
-Simply include the script `readtime.js` in your page’s **footer code** (before `</body>`) and you’re set. For example, add the following to your webpage:
+Simply include the script `readtime.js` in your page’s **footer** code (before `</body>`) and you’re set. For example, add the following to your webpage:
 
 ```html
-<script async src="readtime.js"></script>
+<script src="readtime.js"></script>
 ```
 
 You can also use the CDN version via jsDelivr:
