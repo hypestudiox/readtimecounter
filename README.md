@@ -1,6 +1,6 @@
-# Reading Time Counter v3.2.4
+# Reading Time Counter v3.2.5
 
-A ***simple and robust*** reading time counter calculates the reading time for English, [CKJ](https://en.wikipedia.org/wiki/CJK_characters) (Chinese, Korean, Japanese), and other Latin-based languages. The script also takes into account the number of images in the content, providing an estimated reading time that combines text and image viewing time.
+A ***simple and robust*** reading time counter that **accurately** counts words, characters, and images in your content. It calculates the estimated reading time for English, CKJ (Chinese, Korean, Japanese), and other Latin-based languages by combining text reading and image viewing times.
 
 <br>
 
@@ -90,6 +90,6 @@ References:
 
 https://en.wikipedia.org/wiki/English_alphabet
 
-https://en.wikipedia.org/wiki/Universal_Character_Set_characters
-
 https://en.wikipedia.org/wiki/CJK_characters
+
+https://en.wikipedia.org/wiki/Universal_Character_Set_characters
