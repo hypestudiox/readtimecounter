@@ -1,5 +1,5 @@
 /**
- * Reading Time Counter v3.2.5
+ * Reading Time Counter v3.2.6
  * https://github.com/hypestudiox/readtimecounter
  */
 (function () {
@@ -78,7 +78,7 @@
     displayTime = displayTime === 0 ? "0" : displayTime; // Ensure 0 for empty content
 
     const readTimeElement = document.getElementById("readtime");
-    if (readTimeElement) readTimeElement.textContent = `${displayTime} min`;
+    if (readTimeElement) readTimeElement.textContent = `${displayTime}`;
 
     const wordCountElement = document.getElementById("wordCount");
     if (wordCountElement) wordCountElement.textContent = engCount;
