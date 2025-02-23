@@ -1,72 +1,122 @@
 /**
- * Reading Time Counter
+ * Reading Time Counter v3.2.4
  * https://github.com/hypestudiox/readtimecounter
- * v2.2.0
  */
-document.addEventListener("DOMContentLoaded", function () {
-  // Settings
-  let engSpeed = 235; // words per minute
-  let charSpeed = 280; // characters per minute
-  let imgSpeed = 15; // seconds per image
+(function () {
+  // Default settings (can be overridden via window.readingTimeSettings)
+  const defaults = {
+    engSpeed: 230, // words per minute for English and Latin-based languages
+    charSpeed: 285, // CKJ characters per minute
+    imgSpeed: 8 // seconds per image
+  };
+
+  // Merge defaults with user overrides (if provided)
+  const settings = Object.assign(
+    {},
+    defaults,
+    window.readingTimeSettings || {}
+  );
+
   // Helper functions
-  function countEnglishWords(text) {
-    // Removes punctuations but considers hyphens between words, then split by spaces
-    let words = text
-      .replace(/[^\w\s-]|_/g, "")
-      .replace(/\s+/g, " ")
-      .split(" ");
-    return words.filter(Boolean).length; // Filter out any empty strings
+  function countWords(text, isCKJ = false) {
+    if (isCKJ) {
+      let matches = text.match(
+        /[\p{Script=Han}\p{Script=Hangul}\p{Script=Hiragana}\p{Script=Katakana}]+/gu
+      );
+      return matches ? matches.join("").length : 0;
+    } else {
+      let cleanedText = text
+        .replace(/[^\w\s'-]/g, " ") // Keep apostrophes and hyphens
+        .replace(/\s+/g, " ") // Normalize spaces and line breaks
+        .trim();
+      return cleanedText.split(" ").filter((word) => word.length > 0).length;
+    }
   }
-  function countNonEnglishCharacters(text) {
-    // Regular expression that matches CKJ characters, excludes numbers and punctuations.
-    let matches = text.match(
-      /[^\w\s!-@[-`{-~\uFF01-\uFF0F\uFF1A-\uFF20\uFF3B-\uFF40\uFF5B-\uFF65]+/g
-    );
-    return matches ? matches.join("").length : 0;
-  }
+
   function countImages(element) {
-    return element.querySelectorAll("img").length;
+    return element.querySelectorAll("img[alt], svg[alt]").length;
   }
+
+  function getReadableText(element) {
+    function walkNodes(node) {
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        if (["SCRIPT", "STYLE"].includes(node.nodeName)) {
+          return "";
+        }
+        // Join child nodes with a space to simulate natural separation
+        return Array.from(node.childNodes).map(walkNodes).join(" ");
+      } else if (node.nodeType === Node.TEXT_NODE) {
+        return node.textContent || "";
+      }
+      return "";
+    }
+    // Extract text and normalize whitespace
+    let rawText = walkNodes(element);
+    return rawText
+      .replace(/\s+/g, " ") // Collapse multiple spaces into one
+      .trim(); // Remove leading/trailing spaces
+  }
+
   function updateDisplay(element) {
-    let text = element.value || element.innerText; // for both textarea/input or other elements
-    let engCount = countEnglishWords(text);
-    let charCount = countNonEnglishCharacters(text);
+    let text = getReadableText(element);
+    let engCount = countWords(text, false);
+    let ckjCount = countWords(text, true);
     let imgCount = countImages(element);
-    // Caculations
-    let engTime = engCount / engSpeed; // in minutes
-    let charTime = charCount / charSpeed; // in minutes
-    let imgTime = (imgCount * imgSpeed) / 60; // convert seconds to minutes
-    let totalReadingTime = engTime + charTime + imgTime;
-    let roundedTime = Math.round(totalReadingTime * 10) / 10; // round to 1 decimal place
-    // Display reading time
-    let displayTime =
-      roundedTime % 1 === 0 ? Math.round(roundedTime) : roundedTime;
-    document.getElementById("readtime").textContent = displayTime;
-    // Display counting info
-    let infoParts = [];
-    if (engCount > 0) infoParts.push(`English words: ${engCount}`);
-    if (charCount > 0) infoParts.push(`Non-English characters: ${charCount}`);
-    if (imgCount > 0) infoParts.push(`Images: ${imgCount}`);
-    document.getElementById("hybridCount").textContent = infoParts.join(", ");
+
+    let engTime = engCount / settings.engSpeed;
+    let ckjTime = ckjCount / settings.charSpeed;
+    let imgTime = (imgCount * settings.imgSpeed) / 60;
+    let totalReadingTime = engTime + ckjTime + imgTime;
+
+    let roundedTime = Math.round(totalReadingTime * 10) / 10;
+    let displayTime = roundedTime === 0 ? "0" : roundedTime.toFixed(1);
+
+    const readTimeElement = document.getElementById("readtime");
+    if (readTimeElement) readTimeElement.textContent = `${displayTime} min`;
+
+    const wordCountElement = document.getElementById("wordCount");
+    if (wordCountElement) wordCountElement.textContent = engCount;
+
+    const ckjCountElement = document.getElementById("ckjCount");
+    if (ckjCountElement) ckjCountElement.textContent = ckjCount;
+
+    const imgCountElement = document.getElementById("imgCount");
+    if (imgCountElement) imgCountElement.textContent = imgCount;
+
+    const hybridCountElement = document.getElementById("hybridCount");
+    if (hybridCountElement) {
+      let infoParts = [];
+      if (engCount > 0) infoParts.push(`${engCount} Words`);
+      if (ckjCount > 0) infoParts.push(`${ckjCount} CKJ Characters`);
+      if (imgCount > 0) infoParts.push(`${imgCount} Images`);
+      hybridCountElement.textContent = infoParts.length
+        ? infoParts.join(" • ")
+        : "0";
+    }
   }
-  // Monitor content changes
-  const readtimeArea = document.getElementById("readtimearea");
-  // Use input event for textarea/input elements and contenteditable, and MutationObserver for others
-  if (
-    readtimeArea.tagName === "INPUT" ||
-    readtimeArea.tagName === "TEXTAREA" ||
-    readtimeArea.isContentEditable
-  ) {
-    readtimeArea.addEventListener("input", function () {
-      updateDisplay(readtimeArea);
-    });
-  } else {
-    const config = { attributes: true, childList: true, subtree: true };
-    const observer = new MutationObserver(function () {
-      updateDisplay(readtimeArea);
-    });
-    observer.observe(readtimeArea, config);
-  }
-  // Initial update
-  updateDisplay(readtimeArea);
-});
+
+  // Initialize on DOMContentLoaded
+  document.addEventListener("DOMContentLoaded", function () {
+    const readtimeArea = document.getElementById("readtimearea");
+    if (!readtimeArea) {
+      return; // Silently exit if no readtimearea
+    }
+
+    if (
+      ["INPUT", "TEXTAREA"].includes(readtimeArea.tagName) ||
+      readtimeArea.isContentEditable
+    ) {
+      readtimeArea.addEventListener("input", () => updateDisplay(readtimeArea));
+    } else {
+      const observer = new MutationObserver(() => updateDisplay(readtimeArea));
+      observer.observe(readtimeArea, {
+        attributes: true,
+        childList: true,
+        subtree: true,
+        characterData: true
+      });
+    }
+
+    updateDisplay(readtimeArea);
+  });
+})();
