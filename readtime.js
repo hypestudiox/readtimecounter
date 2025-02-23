@@ -1,5 +1,5 @@
 /**
- * Reading Time Counter v3.2.4
+ * Reading Time Counter v3.2.5
  * https://github.com/hypestudiox/readtimecounter
  */
 (function () {
@@ -7,7 +7,8 @@
   const defaults = {
     engSpeed: 230, // words per minute for English and Latin-based languages
     charSpeed: 285, // CKJ characters per minute
-    imgSpeed: 8 // seconds per image
+    imgSpeed: 8, // seconds per image
+    timeFormat: "decimal" // "decimal" or "integer"
   };
 
   // Merge defaults with user overrides (if provided)
@@ -43,14 +44,12 @@
         if (["SCRIPT", "STYLE"].includes(node.nodeName)) {
           return "";
         }
-        // Join child nodes with a space to simulate natural separation
         return Array.from(node.childNodes).map(walkNodes).join(" ");
       } else if (node.nodeType === Node.TEXT_NODE) {
         return node.textContent || "";
       }
       return "";
     }
-    // Extract text and normalize whitespace
     let rawText = walkNodes(element);
     return rawText
       .replace(/\s+/g, " ") // Collapse multiple spaces into one
@@ -68,8 +67,15 @@
     let imgTime = (imgCount * settings.imgSpeed) / 60;
     let totalReadingTime = engTime + ckjTime + imgTime;
 
-    let roundedTime = Math.round(totalReadingTime * 10) / 10;
-    let displayTime = roundedTime === 0 ? "0" : roundedTime.toFixed(1);
+    // Format time based on settings.timeFormat
+    let roundedTime = Math.round(totalReadingTime * 10) / 10; // Base calculation to 1 decimal
+    let displayTime;
+    if (settings.timeFormat === "integer") {
+      displayTime = Math.round(totalReadingTime); // Round to nearest integer
+    } else {
+      displayTime = roundedTime; // Keep 1 decimal place (default)
+    }
+    displayTime = displayTime === 0 ? "0" : displayTime; // Ensure 0 for empty content
 
     const readTimeElement = document.getElementById("readtime");
     if (readTimeElement) readTimeElement.textContent = `${displayTime} min`;

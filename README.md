@@ -11,13 +11,13 @@ A ***simple and robust*** reading time counter calculates the reading time for E
 Simply include the script `readtime.js` in your page’s **footer** code (before `</body>`) and you’re set. For example, add the following to your webpage:
 
 ```html
-<script src="readtime.js"></script>
+<script defer src="readtime.js"></script>
 ```
 
 You can also use the CDN version via jsDelivr:
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/hypestudiox/readtimecounter/readtime.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/hypestudiox/readtimecounter/readtime.min.js"></script>
 ```
 
 ### Define the area for the counting the Read Time:
@@ -59,15 +59,16 @@ Example:
 
 ## Configurations
 
-You can override default reading speed by:
+You can override default reading speed and time format by:
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/hypestudiox/readtimecounter/readtime.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/hypestudiox/readtimecounter/readtime.min.js"></script>
 <script>
   window.readingTimeSettings = {
     engSpeed: 220,
     charSpeed: 300,
-    imgSpeed: 10
+    imgSpeed: 10,
+    timeFormat: "integer"
   };
 </script>
 ```
